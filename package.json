@@ -1,0 +1,22 @@
+{
+  "name": "toad-story",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf dist || true",
+    "start": "yarn clean && parcel serve index.html",
+    "build": "yarn clean && parcel build ./index.html --dist-dir ./dist --public-url ./",
+    "deploy": "yarn build && aws s3 rm s3://public-bucket-hosting2 --recursive && aws s3 cp dist s3://public-bucket-hosting2 --recursive",
+    "test": "yarn run build && ex-test -d ./dist -t ./test/test.js" 
+  },
+  "author": "Simon Moravec",
+  "license": "ISC",
+  "dependencies": {
+    "excalibur": "0.27.0",
+    "typescript": "4.7.4",
+    "@excaliburjs/testing": "0.25.1"
+  },
+  "devDependencies": {
+    "parcel": "2.6.2"
+  }
+}
